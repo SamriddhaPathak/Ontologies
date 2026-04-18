@@ -26,15 +26,16 @@
         "MisDetect: A Multi-Domain Misinformation Detection Ontology for Social Media"^^xsd:string ;
     dc:description
         "An OWL 2 DL ontology for formal representation, classification, and reasoning about misinformation in Twitter/X data across Political, Educational, and Healthcare domains. The ontology aligns with SIOC, PROV-O, NIF, and Schema.org to ensure interoperability with existing Semantic Web resources. Developed by the Centre for Artificial Intelligence Research Nepal (CAIR Nepal)."^^xsd:string ;
-    dc:creator         "CAIR Nepal"^^xsd:string ;
-    dc:contributor     "CAIR Nepal Research Group"^^xsd:string ;
+    dc:creator         "Samriddha Pathak"^^xsd:string ;
+    dcterms:creator    misind:SamriddhaPathak ;
+    dc:contributor     "Samriddha Pathak (CAIR Nepal Research Group)"^^xsd:string ;
     dc:publisher       "CAIR Nepal"^^xsd:string ;
     dc:rights          "This ontology is distributed under the Creative Commons Attribution 4.0 International License."^^xsd:string ;
     dc:subject         "Misinformation Detection, Social Media, Knowledge Representation, OWL 2, Twitter"^^xsd:string ;
     dc:language        "en"^^xsd:string ;
 
     dcterms:created    "2026-01-01"^^xsd:date ;
-    dcterms:modified   "2026-04-01"^^xsd:date ;
+    dcterms:modified   "2026-04-18"^^xsd:date ;
     dcterms:license    <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:identifier "http://cair-nepal.org/ontology/misinformation"^^xsd:anyURI ;
 
@@ -50,7 +51,7 @@
         <https://github.com/cair-nepal/misdetect-ontology> ;
 
     # --- Imported Vocabularies (by reference; no full import for portability) ---
-    rdfs:comment
+    skos:scopeNote
         "This ontology reuses concepts from SIOC (sioc:Post, sioc:UserAccount), PROV-O (prov:Entity, prov:Activity, prov:Agent), NIF (nif:String, nif:Context), OA (oa:Annotation, oa:TextualBody), and Schema.org (schema:Person, schema:Place)."^^xsd:string .
 
 
@@ -316,6 +317,7 @@ mis:PropagationCascade
 
 mis:Thread
     a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
     rdfs:label "Thread"^^xsd:string ;
     rdfs:comment "A sequence of reply tweets connected to an original tweet, forming a conversational structure."^^xsd:string ;
     rdfs:isDefinedBy <http://cair-nepal.org/ontology/misinformation> .
@@ -999,20 +1001,21 @@ misind:annotationEvent_001
     rdfs:comment "Annotation batch for Healthcare domain tweets, June 2024. IAA computed using Cohen kappa."^^xsd:string .
 
 # --- Example User ---
-misind:user_johndoe
+misind:user_samriddha_pathak
     a mis:UnverifiedUser ;
     mis:userID "987654321"^^xsd:string ;
-    mis:userName "johndoe"^^xsd:string ;
-    mis:userDisplayName "John Doe"^^xsd:string ;
+    mis:userName "samriddha_pathak"^^xsd:string ;
+    mis:userDisplayName "Samriddha Pathak"^^xsd:string ;
+    foaf:name "Samriddha Pathak"^^xsd:string ;
     mis:userLocation "Kathmandu, Nepal"^^xsd:string ;
-    mis:userDescription "Health researcher | Policy advocate"^^xsd:string ;
+    mis:userDescription "AI Researcher | Ontology Engineer | CAIR Nepal"^^xsd:string ;
     mis:userCreated "2015-03-12T00:00:00"^^xsd:dateTime ;
     mis:followerCount "1200"^^xsd:nonNegativeInteger ;
     mis:friendCount "340"^^xsd:nonNegativeInteger ;
     mis:favouriteCount "4500"^^xsd:nonNegativeInteger ;
     mis:tweetCount "3200"^^xsd:nonNegativeInteger ;
     mis:isVerified "false"^^xsd:boolean ;
-    mis:accountAgeInDays "3318"^^xsd:nonNegativeInteger ;
+    mis:accountAgeInDays "3383"^^xsd:nonNegativeInteger ;
     mis:followerFriendRatio "3.53"^^xsd:decimal ;
     mis:userLocatedIn misind:location_kathmandu .
 
@@ -1022,6 +1025,23 @@ misind:location_kathmandu
     rdfs:label "Kathmandu, Nepal"^^xsd:string ;
     schema:name "Kathmandu"^^xsd:string ;
     schema:addressCountry "NP"^^xsd:string .
+# --- Example Retweeter User ---
+misind:user_retweeter_01
+    a mis:UnverifiedUser ;
+    mis:userID "112233445566"^^xsd:string ;
+    mis:userName "health_advocate_np"^^xsd:string ;
+    mis:userDisplayName "Health Advocate NP"^^xsd:string ;
+    mis:userLocation "Kathmandu, Nepal"^^xsd:string ;
+    mis:userCreated "2018-07-20T00:00:00"^^xsd:dateTime ;
+    mis:followerCount "320"^^xsd:nonNegativeInteger ;
+    mis:friendCount "210"^^xsd:nonNegativeInteger ;
+    mis:favouriteCount "980"^^xsd:nonNegativeInteger ;
+    mis:tweetCount "870"^^xsd:nonNegativeInteger ;
+    mis:isVerified "false"^^xsd:boolean ;
+    mis:accountAgeInDays "2156"^^xsd:nonNegativeInteger ;
+    mis:followerFriendRatio "1.52"^^xsd:decimal .
+
+
 
 # --- Hashtag instances ---
 misind:hashtag_vaccines
@@ -1056,7 +1076,7 @@ misind:tweet_001
     mis:replyCount "27"^^xsd:nonNegativeInteger ;
     mis:languageCode "en"^^xsd:language ;
     mis:sensitiveContent "false"^^xsd:boolean ;
-    mis:hasAuthor misind:user_johndoe ;
+    mis:hasAuthor misind:user_samriddha_pathak ;
     mis:hasClaim misind:claim_001 ;
     mis:belongsToDomain misind:HealthcareDomainInstance ;
     mis:hasInformationLabel misind:label_tweet001 ;
@@ -1077,17 +1097,46 @@ misind:url_refutation_001
     mis:urlValue "https://www.cdc.gov/vaccinesafety/concerns/autism.html"^^xsd:anyURI ;
     mis:urlDomain "cdc.gov"^^xsd:string .
 
+misind:label_tweet002
+    a mis:InformationLabel ;
+    mis:labelValue "1"^^xsd:integer ;
+    mis:annotationConfidence "0.91"^^xsd:decimal ;
+    mis:annotationTimestamp "2024-06-10T14:00:00"^^xsd:dateTime ;
+    mis:annotatedBy misind:annotator_expert_01 ;
+    mis:annotationMethod misind:annotationEvent_001 .
+
 # --- Example Retweet ---
 misind:tweet_002
     a mis:Retweet ;
     mis:tweetID "9876543210987654321"^^xsd:string ;
-    mis:tweetText "RT @johndoe: Vaccines cause autism, this has been proven by multiple studies."^^xsd:string ;
+    mis:tweetText "RT @samriddha_pathak: Vaccines cause autism, this has been proven by multiple studies."^^xsd:string ;
     mis:tweetDate "2024-06-15T12:45:00"^^xsd:dateTime ;
     mis:isRetweet "true"^^xsd:boolean ;
     mis:isMisinformation "true"^^xsd:boolean ;
     mis:sourceClient "Twitter for iPhone"^^xsd:string ;
+    mis:hashtagList "#vaccines #health"^^xsd:string ;
     mis:retweetCount "0"^^xsd:nonNegativeInteger ;
     mis:likeCount "5"^^xsd:nonNegativeInteger ;
+    mis:replyCount "0"^^xsd:nonNegativeInteger ;
+    mis:languageCode "en"^^xsd:language ;
+    mis:sensitiveContent "false"^^xsd:boolean ;
+    mis:hasAuthor misind:user_retweeter_01 ;
+    mis:hasClaim misind:claim_001 ;
     mis:isRetweetOf misind:tweet_001 ;
     mis:belongsToDomain misind:HealthcareDomainInstance ;
-    mis:derivedFromDataset misind:CAIRDataset_v1 .
+    mis:hasInformationLabel misind:label_tweet002 ;
+    mis:derivedFromDataset misind:CAIRDataset_v1 ;
+    prov:generatedAtTime "2024-06-15T12:45:00"^^xsd:dateTime .
+
+# ===========================================================================
+#  PART 7 — ONTOLOGY AUTHORSHIP (FOAF)
+# ===========================================================================
+
+misind:SamriddhaPathak
+    a foaf:Person, prov:Agent ;
+    foaf:name "Samriddha Pathak"^^xsd:string ;
+    foaf:mbox <mailto:samriddha@cair-nepal.org> ;
+    foaf:organization "Centre for Artificial Intelligence Research Nepal (CAIR Nepal)"^^xsd:string ;
+    rdfs:label "Samriddha Pathak"^^xsd:string ;
+    rdfs:comment "Ontology author and principal researcher at CAIR Nepal. Creator of the MisDetect misinformation ontology."^^xsd:string .
+
